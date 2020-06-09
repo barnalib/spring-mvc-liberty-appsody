@@ -1,0 +1,54 @@
+apiVersion: appsody.dev/v1beta1
+kind: AppsodyApplication
+metadata:
+  annotations:
+    commit.stack.appsody.dev/author: Bhattacharyya, B <b.bhattacharyya@accenture.com>
+    commit.stack.appsody.dev/committer: Bhattacharyya, B <b.bhattacharyya@accenture.com>
+    commit.stack.appsody.dev/date: Mon Jun 8 20:03:50 2020 +0530
+    commit.stack.appsody.dev/message: update
+    image.opencontainers.org/created: "2020-06-08T22:16:42+05:30"
+    stack.appsody.dev/authors: Barnali <b.bhattacharyya@accenture.com>
+    stack.appsody.dev/configured: docker.io/barnalib/mystack:0.1
+    stack.appsody.dev/created: "2020-06-08T21:06:15+05:30"
+    stack.appsody.dev/description: Spring Boot MVC with Spring Data on Open Liberty
+      & OpenJ9 using Maven
+    stack.appsody.dev/documentation: https://github.com/barnalib/stack-spring-mvc-liberty/tree/master/README.md
+    stack.appsody.dev/licenses: Apache-2.0
+    stack.appsody.dev/revision: 778b9a2e4f803d31028604b4adfb61a9fec5c3c5-modified
+    stack.appsody.dev/source: https://github.com/barnalib/stack-spring-mvc-liberty/tree/master/image
+    stack.appsody.dev/tag: docker.io/barnalib/mystack:0.1.1
+    stack.appsody.dev/title: Spring Boot-mvc-data® on Open Liberty
+    stack.appsody.dev/url: https://github.com/barnalib/stack-spring-mvc-liberty
+  creationTimestamp: null
+  labels:
+    image.opencontainers.org/title: test-mystack
+    stack.appsody.dev/id: mystack
+    stack.appsody.dev/version: 0.1.1
+  name: test-mystack
+  namespace: cpfa-dnb
+spec:
+  applicationImage: image-registry.openshift-image-registry.svc:5000/cpfa-dnb/appsody-demo-spring:latest
+  createKnativeService: false
+  expose: true
+  livenessProbe:
+    failureThreshold: 12
+    httpGet:
+      path: /actuator/health
+      port: 9080
+    initialDelaySeconds: 5
+    periodSeconds: 2
+  readinessProbe:
+    failureThreshold: 12
+    httpGet:
+      path: /actuator/health
+      port: 9080
+    initialDelaySeconds: 5
+    periodSeconds: 2
+  service:
+    annotations:
+      prometheus.io/path: /actuator/prometheus
+      prometheus.io/scrape: "true"
+    port: 9080
+    type: NodePort
+  stack: mystack
+  version: 1.0.0
